@@ -1,17 +1,41 @@
 {
   "name": "git-pr-train",
-  "version": "1.0.0",
-  "description": "",
+  "version": "2.5.0",
+  "description": "A tool to help manage PR chains",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "git-pr-train": "./index.js"
+  },
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/realyze/pr-train"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "dependencies": {
     "colors": "^1.2.1",
+    "commander": "^3.0.2",
     "figlet": "^1.2.0",
+    "inquirer": "^6.2.1",
+    "js-yaml": "^3.13.1",
+    "lodash": "^4.17.15",
+    "lodash.difference": "^4.5.0",
     "lodash.sortby": "^4.7.0",
-    "simple-git": "^1.92.0"
+    "node-emoji": "^1.8.1",
+    "octonode": "^0.9.3",
+    "progress": "^2.0.0",
+    "promptly": "^3.0.3",
+    "shelljs": "^0.8.3",
+    "simple-git": "^1.102.0",
+    "string-width": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^3.11.2"
   }
 }

@@ -1,1 +1,7 @@
 node_modules
+# Intellij IDE project settings
+.idea
+# Because dogfooding
+.pr-train.yml
+
+git-pr-train-2.5.0.tgz
