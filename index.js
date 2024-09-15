@@ -352,6 +352,7 @@ async function main() {
       baseBranch,
       printLinks: getConfigOption(ymlConfig, 'prs.print-urls'),
       context: trainCfg.context,
+      trainBase,
     });
     const nickAndRepo = await getRepoName({ sg, remote: program.remote });
     console.log(`https://github.com/${nickAndRepo}/pull/${prDict[currentBranch].pr}/`);

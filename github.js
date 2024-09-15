@@ -128,6 +128,7 @@ function checkAndReportInvalidBaseError(e, base) {
  * @param {string} remote
  * @param {string} baseBranch
  * @param {boolean} printLinks
+ * @param {string} trainBase the branch marked as base. Usually the next branch to be merged in the train.
  */
 async function ensurePrsExist({
                                 sg,
@@ -138,6 +139,7 @@ async function ensurePrsExist({
                                 baseBranch = DEFAULT_BASE_BRANCH,
                                 printLinks = false,
                                 context = '',
+                                trainBase,
                               }) {
   //const allBranches = combinedBranch ? sortedBranches.concat(combinedBranch) : sortedBranches;
   const octoClient = octo.client(readGHKey());
@@ -195,7 +197,7 @@ async function ensurePrsExist({
       title,
       body,
     } = branch === combinedBranch ? getCombinedBranchPrMsg() : await constructPrMsg(sg, branch);
-    const base = index === 0 || branch === combinedBranch ? baseBranch : allBranches[index - 1];
+    const base = index === 0 || branch === combinedBranch || branch === trainBase ? baseBranch : allBranches[index - 1];
     process.stdout.write(`Checking if PR for branch ${branch} already exists... `);
     const prs = await ghRepo.prsAsync({
       state: 'all',
