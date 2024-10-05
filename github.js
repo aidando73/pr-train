@@ -104,6 +104,21 @@ function upsertContextSectionInBody(contextSection, body) {
   }
 }
 
+function upsertFeedbackForm(body) {
+  body = body || '';
+  let feedbackForm = '<pr-train-feedback>\n\n';
+  feedbackForm += '#### Feedback\n';
+  feedbackForm += '- Have feedback that doesn’t quite belong in this PR?\n';
+  feedbackForm += '- If you have 2-5 minutes, I always appreciate getting feedback\n';
+  feedbackForm += '- [Feedback form](https://forms.gle/JNJUd3pda73myPgP7) 👈 (Responses are anonymous)\n';
+  feedbackForm += '</pr-train-feedback>';
+  if (body.match(/<pr-train-feedback>/)) {
+    return body.replace(/<pr-train-feedback>[^]*<\/pr-train-feedback>/, feedbackForm);
+  } else {
+    return body + feedbackForm;
+  }
+}
+
 
 function checkAndReportInvalidBaseError(e, base) {
   const { field, code } = get(e, 'body.errors[0]', {});
@@ -263,6 +278,7 @@ async function ensurePrsExist({
       const contextSection = constructContextSection(context);
       newBody = upsertContextSectionInBody(contextSection, newBody);
     }
+    newBody = upsertFeedbackForm(newBody);
     process.stdout.write(`Updating PR for branch ${branch}...`);
     const updateResponse = await ghPr.updateAsync({
       title,
